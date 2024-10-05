@@ -25,7 +25,7 @@
 namespace Slyvina {
     namespace Kitty {
 
-#pragma region "Class to shared pointer.
+#pragma region "Class to shared pointer."
         // Remember this is just manually translated C# code, and C# only uses pointers for classes and has automated garbage collection.
         // C++ has none of that.
 #define KittyClass(real,pseudo) class real; typedef std::shared_ptr<real> pseudo;
@@ -54,7 +54,7 @@ namespace Slyvina {
                 Attribute = Units::qColor::Blue,
                 BaseType = Units::qColor::Magenta;
         };
-        _KittyColors KittyColors;
+        extern _KittyColors KittyColors;
 
         
         class _KittyOutput {
@@ -132,9 +132,9 @@ namespace Slyvina {
             VecString BaseTypes = NewVecString(); //List<std::string> BaseTypes = new List<std::string>();
             std::string stringstart = "\"";
             std::string stringend = "\"";
-            std::string stringstart = "@\"";
-            std::string stringend = "\"";
-            std::string stringstart = "'";
+            std::string mlstringstart = "@\"";
+            std::string mlstringend = "\"";
+            std::string astringstart = "'";
             std::string astringend = "'";
             std::string singcomment = "//";
             std::string mulcommentstart = "/*";
