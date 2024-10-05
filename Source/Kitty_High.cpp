@@ -28,6 +28,8 @@ using namespace Slyvina::Units;
 namespace Slyvina {
 	namespace Kitty {
 
+		_KittyColors KittyColors{};
+
 		void _KittyOutput::ResetColor() {
 			ForegroundColor = qColor::Grey;
 			BackgroundColor = qColor::Black;
@@ -430,5 +432,9 @@ namespace Slyvina {
 		}
 
 #pragma endregion
-	}
+		_KittyMarkup::_KittyMarkup() {
+			Base->MLKid = this;
+			Base->abstract_Show = __ML__Show;
+		}
+}
 }
