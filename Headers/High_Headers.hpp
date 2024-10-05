@@ -30,5 +30,9 @@ namespace Slyvina {
 		void KittyHighC();
 		void KittyHighPascal();
 		void KittyHighBrainFuck();
+		void KittyHighGo();
+		void KittyHighBlitzBasic();
+		void KittyHighSASKIA();
+		void KittyHighPython();
 	}
 }
