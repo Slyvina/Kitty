@@ -102,6 +102,7 @@ namespace Slyvina {
 				} while (loopme);
 				*/
 				pause(); // This will have to do the trick (for now)
+				PagLines = 0;
 			}
 		}
 
