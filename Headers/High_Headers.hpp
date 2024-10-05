@@ -2,7 +2,7 @@
 // Kitty/Headers/High_Headers.hpp
 // Kitty High Headers
 // version: 24.10.05
-// Copyright (C) 2019, 2020, 2023 Jeroen P. Broks
+// Copyright (C) 2019, 2020, 2023, 2024 Jeroen P. Broks
 // This software is provided 'as-is', without any express or implied
 // warranty.  In no event will the authors be held liable for any damages
 // arising from the use of this software.
@@ -23,5 +23,10 @@
 namespace Slyvina {
 	namespace Kitty {
 		void KittyHighCS();
+		void KittyHighNIL();
+		void KittyHighLua();
+		void KittyHighScyndi();
+		void KittyBlitzMax();
+		void KittyHighC();
 	}
 }
