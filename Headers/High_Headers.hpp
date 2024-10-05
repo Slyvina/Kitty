@@ -34,5 +34,6 @@ namespace Slyvina {
 		void KittyHighBlitzBasic();
 		void KittyHighSASKIA();
 		void KittyHighPython();
+		void KittyHighJavaScript();
 	}
 }
