@@ -44,5 +44,30 @@ namespace Slyvina {
 		void KittyHighXML();
 		void KittyHighNeil();
 		void KittyHighINI();
+
+		inline void KittyHigh_ALL() {
+			KittyHighCS();
+			KittyHighNIL();
+			KittyHighLua();
+			KittyHighScyndi();
+			KittyBlitzMax();
+			KittyHighC();
+			KittyHighPascal();
+			KittyHighBrainFuck();
+			KittyHighGo();
+			KittyHighBlitzBasic();
+			KittyHighSASKIA();
+			KittyHighPython();
+			KittyHighJavaScript();
+			KittyHighWhiteSpace();
+			KittyHighBASIC();
+			KittyHighJava();
+			KittyHighVB();
+			KittyHighCobra();
+			KittyHighHTML();
+			KittyHighXML();
+			KittyHighNeil();
+			KittyHighINI();
+		}
 	}
 }
