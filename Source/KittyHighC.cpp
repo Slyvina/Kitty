@@ -25,15 +25,15 @@ namespace Slyvina {
 		void KittyHighC() {
 			static _KittyPL Me{};
 
-		
+
 
 
 
 			_KittyHigh::Langs["c"] = Me.Base;
-						_KittyHigh::Langs["h"] = Me.Base;
-									_KittyHigh::Langs["cpp"] = Me.Base;
-												_KittyHigh::Langs["hpp"] = Me.Base;
-															Me.Base->Language = "C/C++";
+			_KittyHigh::Langs["h"] = Me.Base;
+			_KittyHigh::Langs["cpp"] = Me.Base;
+			_KittyHigh::Langs["hpp"] = Me.Base;
+			Me.Base->Language = "C/C++";
 
 			auto
 				BaseTypes{ Me.BaseTypes },
