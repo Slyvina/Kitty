@@ -39,5 +39,6 @@ namespace Slyvina {
 		void KittyHighBASIC();
 		void KittyHighJava();
 		void KittyHighVB();
+		void KittyHighCobra();
 	}
 }
