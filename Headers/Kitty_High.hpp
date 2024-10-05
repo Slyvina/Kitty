@@ -2,7 +2,7 @@
 // Kitty/Headers/Kitty_High.hpp
 // Kitty High (header)
 // version: 24.10.05
-// Copyright (C) 2019, 2020, 2023 Jeroen P. Broks
+// Copyright (C) 2019, 2020, 2023, 2024 Jeroen P. Broks
 // This software is provided 'as-is', without any express or implied
 // warranty.  In no event will the authors be held liable for any damages
 // arising from the use of this software.
@@ -32,6 +32,7 @@ namespace Slyvina {
         KittyClass(_KittyOutput, KittyOutput);
         KittyClass(_KittyHigh, KittyHigh);
         class _KittyPL;
+        class _KittyMarkup;
 
 
 
@@ -63,8 +64,8 @@ namespace Slyvina {
                 QCol->Reset();
             }
             /* Due to bad experiences with abstract methods (or virutals as they are called in C++), I'll do this a different way
-            abstract public void Write(string a);
-            abstract public void WriteLine(string a);
+            abstract public void Write(std::string a);
+            abstract public void WriteLine(std::string a);
             */
             KittyOutputVoidString abstract_Write{ nullptr };
             KittyOutputVoidString abstract_WriteLine{ nullptr };
@@ -92,10 +93,10 @@ namespace Slyvina {
         class _KittyHigh {
         private:
             static KittyOutput _ko;
-            //String _Language{ "" };
-            //inline void Language(String L) { _Language = L; }
+            //std::string _Language{ "" };
+            //inline void Language(std::string L) { _Language = L; }
         public:
-            static std::map<String, KittyHigh> Langs; //static readonly public SortedDictionary<string, KittyHigh> Langs = new SortedDictionary<string, KittyHigh>();
+            static std::map<std::string, KittyHigh> Langs; //static readonly public SortedDictionary<std::string, KittyHigh> Langs = new SortedDictionary<std::string, KittyHigh>();
 
             static int NumLines();
             static int PagLines;
@@ -106,37 +107,38 @@ namespace Slyvina {
 
             static void PageBreak();
 
-            inline static void WriteLine(String a = "") {
+            inline static void WriteLine(std::string a = "") {
                 Console()->WriteLine(a);
                 PageBreak();
             }
 
-            //public abstract void Show(string src, bool linenumbers = false);
+            //public abstract void Show(std::string src, bool linenumbers = false);
             KittyOutputShow abstract_Show{ nullptr };
-            void Show(String src, bool linenumbers = false);
-            //public void Show(StringBuilder src, bool linenumbers = false) = > Show(src, linenumbers);
-            String Language{ "" }; //inline String Language() { return _Language; }
+            void Show(std::string src, bool linenumbers = false);
+            //public void Show(std::stringBuilder src, bool linenumbers = false) = > Show(src, linenumbers);
+            std::string Language{ "" }; //inline std::string Language() { return _Language; }
             static void LineNumber(int ln);
 
             static void Init();
             _KittyPL* PLKid{ nullptr };
+            _KittyMarkup* MLKid{ nullptr };
         };
 
 
         class _KittyPL { //: KittyHigh {
         public:
             KittyHigh Base{ std::shared_ptr<_KittyHigh>(new _KittyHigh()) };
-            VecString KeyWords = NewVecString(); //protected List<string> KeyWords = new List<string>();
-            VecString BaseTypes = NewVecString(); //List<string> BaseTypes = new List<string>();
-            String stringstart = "\"";
-            String stringend = "\"";
-            String mlstringstart = "@\"";
-            String mlstringend = "\"";
-            String astringstart = "'";
-            String astringend = "'";
-            String singcomment = "//";
-            String mulcommentstart = "/*";
-            String mulcommentend = "*/";
+            VecString KeyWords = NewVecString(); //protected List<std::string> KeyWords = new List<std::string>();
+            VecString BaseTypes = NewVecString(); //List<std::string> BaseTypes = new List<std::string>();
+            std::string stringstart = "\"";
+            std::string stringend = "\"";
+            std::string stringstart = "@\"";
+            std::string stringend = "\"";
+            std::string stringstart = "'";
+            std::string astringend = "'";
+            std::string singcomment = "//";
+            std::string mulcommentstart = "/*";
+            std::string mulcommentend = "*/";
             char escape = '\\';
             bool mulcomment = true;
             bool mulcommentfullline = false; // Needed for BlitzMax where commands taking up a full line are used for multi line comments. This is not entirely fool-proof, but it'll have to do.
@@ -146,11 +148,12 @@ namespace Slyvina {
             _KittyPL();
 
         };
+        
 
         /* No longer needed as class, but a few things need to be set in order nonetheless
         class KittyNiks : KittyHigh {
             public KittyNiks() { Language = "Unrecognized"; }
-            public override void Show(string src, bool linenumbers = false) {
+            public override void Show(std::string src, bool linenumbers = false) {
                 src = src.Replace("\r\n", "\n");
                 var lines = src.Split('\n');
                 for (int i = 0; i < lines.Length; i++) {
@@ -162,133 +165,21 @@ namespace Slyvina {
         */
         KittyHigh KittyNiks();
 
-        // Markup support by freezernick
-        class KittyMarkup : KittyHigh
-        {
-            protected string stringstart = "\"";
-            protected string stringend = "\"";
-            protected bool mulcomment = true;
-            protected string mulcommentstart = "<!--";
-            protected string mulcommentend = "-->";
-            protected string opentagchar = "<";
-            protected string closetagchar = ">";
-            protected string endtagchar = "/>";
-            protected char escape = '\\';
+        // Markup support by freezernick (translated to C++ by Jeroen P. Broks)
+        class _KittyMarkup {      
+        public:
+            KittyHigh Base{ std::shared_ptr<_KittyHigh>(new _KittyHigh()) };
+            std::string stringstart = "\"";
+            std::string stringend = "\"";
+            bool mulcomment = true;
+            std::string mulcommentstart = "<!--";
+            std::string mulcommentend = "-->";
+            std::string opentagchar = "<";
+            std::string closetagchar = ">";
+            std::string endtagchar = "/>";
+            char escape = '\\';
 
-            
-            public override void Show(string src, bool linenumbers = false) {
-                bool intag = false;
-                string word = "";
-                void showword() {
-                    var col = KittyColors.Other;
-                    if (word.StartsWith(opentagchar) || word.EndsWith(endtagchar) || word.EndsWith(closetagchar))
-                        col = KittyColors.KeyWord;
-                    if (intag)
-                        col = KittyColors.Attribute;
-                    Console.ForegroundColor = col;
-                    Console.Write(word);
-                }
-                src = src.Replace("\r\n", "\n");
-                var lines = src.Split('\n');
-                bool mulcomm = false;
-                for (int i = 0; i < lines.Length; i++) {
-                    if (linenumbers) LineNumber(i + 1);
-                    word = "";
-                    intag = false;
-                    var singstring = false;
-                    var stringescape = false;
-                    bool wassingstring;
-
-                    for (int p = 0; p < lines[i].Length; p++) {
-                        var ch = lines[i][p];
-
-                        wassingstring = singstring;
-                        singstring = singstring || (p < lines[i].Length - 1 && lines[i].Substring(p, stringstart.Length) == stringstart);
-                        mulcomm = mulcomm || (p < lines[i].Length - 3 && lines[i].Substring(p, mulcommentstart.Length) == mulcommentstart && !singstring && mulcomment);
-                        if (singstring) {
-                            Console.ForegroundColor = KittyColors.String;
-                            Console.Write($"{ch}");
-                            if (wassingstring && p < lines[i].Length && lines[i].Substring(p, stringend.Length) == stringend && !stringescape)
-                                singstring = false;
-                            else
-                                stringescape = ch == escape && !stringescape;
-                        } else if (mulcomm) {
-                            Console.ForegroundColor = KittyColors.Comment;
-                            Console.Write($"{ch}");
-                            if (p < lines[i].Length - 2 && lines[i].Substring(p, mulcommentend.Length) == mulcommentend) {
-                                Console.Write($"{lines[i][p + 1]}");
-                                Console.Write($"{lines[i][p + 2]}");
-                                p = p + 2;
-                                mulcomm = false;
-                            }
-                        } else if (word == "" && ch == '<') {
-                            word += $"{ch}";
-                            int q = p;
-                            bool inline = true;
-                            while (inline) {
-                                q++;
-                                if (lines[i][q] == '=') {
-                                    word += lines[i][q];
-                                    p = q;
-                                    showword();
-                                    word = "";
-                                    intag = true;
-                                    inline = false;
-                                } else if (lines[i][q] == '>') {
-                                    word += lines[i][q];
-                                    p = q;
-                                    inline = false;
-                                    intag = false;
-                                    showword();
-                                    word = "";
-                                } else if (lines[i][q] == ' ') {
-                                    word += lines[i][q];
-                                    p = q;
-                                    showword();
-                                    word = "";
-                                    inline = false;
-                                    intag = true;
-                                } else {
-                                    word += lines[i][q];
-                                }
-                            }
-                        } else if (word == "" && intag && ch != ' ' && ch != '>' && ch != '/') {
-                            word += $"{ch}";
-                            int q = p;
-                            bool inline = true;
-                            while (inline) {
-                                q++;
-                                if (lines[i][q] == '=') {
-                                    word += lines[i][q];
-                                    p = q;
-                                    showword();
-                                    word = "";
-                                    inline = false;
-                                } else if (lines[i][q] == '>') {
-                                    word += lines[i][q];
-                                    p = q;
-                                    inline = false;
-                                    intag = false;
-                                } else {
-                                    word += lines[i][q];
-                                }
-                            }
-                        } else if (word == "" && intag && ch == '/' && lines[i][p + 1] == '>') {
-                            p += 1;
-                            word = "/>";
-                            intag = false;
-                            showword();
-                            word = "";
-                        } else {
-                            if (ch == '>')
-                                intag = false;
-                            if (word != "") showword(); word = $"{ch}"; showword(); word = "";
-                        }
-                    }
-                    if (word != "") showword();
-                    WriteLine();
-                }
-            }
-        }
+            _KittyMarkup();
+        };
     }
 }
