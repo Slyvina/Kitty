@@ -271,5 +271,27 @@ namespace Slyvina {
 			Base->PLKid = this;
 			Base->abstract_Show = _PLShow;
 		}
+
+#pragma endregion
+
+#pragma region KittyNiks
+		
+		static void _Niks_Show(_KittyHigh*SELF,String src, bool linenumbers = false) {
+			src = StReplace(src,"\r\n", "\n");
+			auto lines{ Split(src,'\n') };
+			for (int i = 0; i < lines->size(); i++) {
+				if (linenumbers) SELF->LineNumber(i + 1);
+				SELF->Console()->ForegroundColor = KittyColors.Other; SeELF->Console()->WriteLine((*lines)[i]);
+			}
+		}
+		KittyHigh KittyNiks() {
+			// Fun fact: "Niks" means "Nothing" in Dutch.
+			//public KittyNiks() { Language = "Unrecognized"; }
+			auto KN = new _KittyHigh();
+			KN->Language = "Unrecognized";
+			KN->abstract_Show = _Niks_Show;
+			return std::shared_ptr<_KittyHigh>(KN);
+		}
 	}
+#pragma endregion
 }

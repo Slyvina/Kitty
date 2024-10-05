@@ -147,6 +147,7 @@ namespace Slyvina {
 
         };
 
+        /* No longer needed as class, but a few things need to be set in order nonetheless
         class KittyNiks : KittyHigh {
             public KittyNiks() { Language = "Unrecognized"; }
             public override void Show(string src, bool linenumbers = false) {
@@ -158,6 +159,8 @@ namespace Slyvina {
                 }
             }
         }
+        */
+        KittyHigh KittyNiks();
 
         // Markup support by freezernick
         class KittyMarkup : KittyHigh
