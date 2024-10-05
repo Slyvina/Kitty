@@ -2,7 +2,7 @@
 // Kitty/Source/KittyHighPython.cpp
 // Kitty High Python
 // version: 24.10.05
-// Copyright (C) 2019 Jeroen P. Broks
+// Copyright (C) 2019, 2024 Jeroen P. Broks
 // This software is provided 'as-is', without any express or implied
 // warranty.  In no event will the authors be held liable for any damages
 // arising from the use of this software.
