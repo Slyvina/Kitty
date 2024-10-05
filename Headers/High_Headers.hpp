@@ -42,5 +42,7 @@ namespace Slyvina {
 		void KittyHighCobra();
 		void KittyHighHTML();
 		void KittyHighXML();
+		void KittyHighNeil();
+		void KittyHighINI();
 	}
 }
