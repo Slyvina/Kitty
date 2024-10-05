@@ -37,5 +37,7 @@ namespace Slyvina {
 		void KittyHighJavaScript();
 		void KittyHighWhiteSpace();
 		void KittyHighBASIC();
+		void KittyHighJava();
+		void KittyHighVB();
 	}
 }
