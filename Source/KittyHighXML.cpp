@@ -1,8 +1,8 @@
 // Lic:
-// Kitty/Headers/High_Headers.hpp
-// Kitty High Headers
+// Kitty/Source/KittyHighXML.cpp
+// Kitty High eXtensible Markup Language
 // version: 24.10.05
-// Copyright (C) 2019, 2020, 2023, 2024 Jeroen P. Broks
+// Copyright (C) 2019, 2024 Freezernick
 // This software is provided 'as-is', without any express or implied
 // warranty.  In no event will the authors be held liable for any damages
 // arising from the use of this software.
@@ -17,30 +17,19 @@
 // misrepresented as being the original software.
 // 3. This notice may not be removed or altered from any source distribution.
 // EndLic
-
-#pragma once
-
+#include <Kitty_High.hpp>
 namespace Slyvina {
 	namespace Kitty {
-		void KittyHighCS();
-		void KittyHighNIL();
-		void KittyHighLua();
-		void KittyHighScyndi();
-		void KittyBlitzMax();
-		void KittyHighC();
-		void KittyHighPascal();
-		void KittyHighBrainFuck();
-		void KittyHighGo();
-		void KittyHighBlitzBasic();
-		void KittyHighSASKIA();
-		void KittyHighPython();
-		void KittyHighJavaScript();
-		void KittyHighWhiteSpace();
-		void KittyHighBASIC();
-		void KittyHighJava();
-		void KittyHighVB();
-		void KittyHighCobra();
-		void KittyHighHTML();
-		void KittyHighXML();
+		void KittyHighXML() {
+			static _KittyMarkup Me{};
+			auto B{ Me.Base };
+			B->Langs["xml"] = B;
+			B->Langs["csproj"] = B;
+			B->Langs["vcxproj"] = B;
+			B->Langs["xaml"] = B;
+			B->Language = "eXtensible Markup Language";
+			Me.stringstart = "\"";
+			Me.stringend = "\"";
+		}
 	}
 }
