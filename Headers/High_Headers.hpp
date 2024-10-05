@@ -28,5 +28,7 @@ namespace Slyvina {
 		void KittyHighScyndi();
 		void KittyBlitzMax();
 		void KittyHighC();
+		void KittyHighPascal();
+		void KittyHighBrainFuck();
 	}
 }
