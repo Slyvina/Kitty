@@ -2,7 +2,7 @@
 // Kitty/Source/KittyHighVisualBasic.cpp
 // Kitty High Visual Basic
 // version: 24.10.05
-// Copyright (C) 2019 freezernick & Jeroen P. Broks
+// Copyright (C) 2019, 2024 freezernick & Jeroen P. Broks
 // This software is provided 'as-is', without any express or implied
 // warranty.  In no event will the authors be held liable for any damages
 // arising from the use of this software.
@@ -20,6 +20,10 @@
 #include <Kitty_High.hpp>
 namespace Slyvina {
 	namespace Kitty {
+
+		// Visual Basic
+		// Added by: freezernick (original C# code)
+		// Converted by: Jeroen P. Broks (to C++)
 		void KittyHighVB() {
 			static _KittyPL Me{};
 			auto B{ Me.Base };
