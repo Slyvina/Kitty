@@ -366,7 +366,8 @@ namespace Slyvina {
 						word += ch; // $"{ch}";
 						int q = p;
 						bool in_line = true; // had to chance inline to in_line. inline is a keyword in C++ (apparently not in C#)
-						while (in_line) {
+						// Jeroen: Added the q<size check. C++ threw an error  during due to q going beyond the string size.
+						while (in_line && q < lines[i].size()) {
 							q++;
 							if (lines[i][q] == '=') {
 								word += lines[i][q];
@@ -397,7 +398,8 @@ namespace Slyvina {
 						word += ch; // $"{ch}";
 						int q = p;
 						bool in_line = true;
-						while (in_line) {
+						// See previes note on q<size check
+						while (in_line && q < lines[i].size()) {
 							q++;
 							if (lines[i][q] == '=') {
 								word += lines[i][q];
