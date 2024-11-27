@@ -61,7 +61,7 @@ namespace Slyvina {
 			if (_ko == nullptr) _ko = KittyCLI();
 			return _ko;
 		}
-
+		
 		void _KittyHigh::Console(KittyOutput value) {
 			//System.Diagnostics.Debug.WriteLine("New Console For KittyHigh set");
 			_ko = value;
